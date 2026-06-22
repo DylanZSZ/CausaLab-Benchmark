@@ -1,0 +1,94 @@
+{
+  "graph_id": "6_collide",
+  "description": "Chain structure: temperatureC -> moisture -> resonanceFreq (Sequential causation)",
+  "nodes": {
+    "temperatureC": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "temperatureC",
+      "display_name": "Temperature (°C)",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "comment": "Root cause - controllable but not directly observable"
+    },
+    "moisture": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "moisture",
+      "display_name": "Moisture",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "comment": "Root cause - caffected by temperatureC, affects resonanceFreq"
+    },
+    "density": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "density",
+      "display_name": "Density",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "comment": "Root cause -  affected by moisture, affects resonanceFreq"
+    },
+    "pressure": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "pressure",
+      "display_name": "Pressure",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "comment": "Root cause -  affected by density, affects resonanceFreq"
+    },
+    "conductivity": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "conductivity",
+      "display_name": "Conductivity",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "comment": "Root cause -  affected by pressure, affects resonanceFreq"
+    },
+    "resonanceFreq": {
+      "is_controllable": false,
+      "observable": true,
+      "property_name": "resonanceFreq",
+      "display_name": "Resonance Frequency (Hz)",
+      "computation": "base_freq + coeff_moisture_freq * moisture + coeff_temp_freq * temperatureC + coeff_density_freq * density + coeff_pressure_freq * pressure + coeff_conductivity_freq * conductivity",
+      "comment": "End effect - only observable outcome"
+    }
+  },
+  "edges": [
+    {"from": "temperatureC", "to": "resonanceFreq"},
+    {"from": "moisture", "to": "resonanceFreq"},
+    {"from": "density", "to": "resonanceFreq"},
+    {"from": "pressure", "to": "resonanceFreq"},
+    {"from": "conductivity", "to": "resonanceFreq"}
+  ],
+  "params": {
+    "base_freq": 900.0,
+    "coeff_temp_freq": 2.0,
+    "coeff_moisture_freq": 3.0,
+    "coeff_density_freq": 4.0,
+    "coeff_pressure_freq": 5.0,
+    "coeff_conductivity_freq": 6.0
+  },
+  "notes": {
+    "causal_structure": "temperatureC -> moisture -> density <- resonanceFreq (collide)"
+  },
+  "budget": 20
+}
+

@@ -1,0 +1,73 @@
+{
+  "graph_id": "diamond_4_nodes",
+  "description": "Diamond structure: temperatureC -> moisture, temperatureC -> density, moisture -> resonanceFreq, density -> resonanceFreq (Common cause with mediated paths)",
+  "nodes": {
+    "temperatureC": {
+      "is_controllable": true,
+      "observable": false,
+      "property_name": "temperatureC",
+      "display_name": "Temperature (°C)",
+      "base_value": {
+        "type": "uniform",
+        "min": 10.0,
+        "max": 50.0
+      },
+      "comment": "Root controllable property - not directly observable"
+    },
+    "moisture": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "moisture",
+      "display_name": "Moisture",
+      "computation": "base + coeff_temp_moisture * temperatureC",
+      "base_value": {
+        "type": "uniform",
+        "min": 20.0,
+        "max": 60.0
+      },
+      "comment": "Hybrid: controllable base moisture (20-60) + effect from temperature. Manual adjustment changes base value."
+    },
+    "density": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "density",
+      "display_name": "Density",
+      "computation": "base + coeff_temp_density * temperatureC",
+      "base_value": {
+        "type": "uniform",
+        "min": 30.0,
+        "max": 70.0
+      },
+      "comment": "Hybrid: controllable base density (30-70) + effect from temperature. Manual adjustment changes base value."
+    },
+    "resonanceFreq": {
+      "is_controllable": false,
+      "observable": true,
+      "property_name": "resonanceFreq",
+      "display_name": "Resonance Frequency (Hz)",
+      "computation": "base_freq + coeff_moisture_freq * moisture + coeff_density_freq * density"
+    }
+  },
+  "edges": [
+    {"from": "temperatureC", "to": "moisture"},
+    {"from": "temperatureC", "to": "density"},
+    {"from": "moisture", "to": "resonanceFreq"},
+    {"from": "density", "to": "resonanceFreq"}
+  ],
+  "params": {
+    "coeff_temp_moisture": 0.5,
+    "coeff_temp_density": 0.4,
+    "base_freq": 800.0,
+    "coeff_moisture_freq": 25.0,
+    "coeff_density_freq": 8.0
+  },
+  "notes": {
+    "hybrid_nodes": "moisture and density are hybrid nodes - they have controllable base values modified by temperature",
+    "computation_base_variable": "In hybrid node computations, 'base' refers to the node's own base_value",
+    "example_moisture": "moisture = base(20-60) + 0.5 * temperatureC. Adjusting moisture changes its base value.",
+    "example_density": "density = base(30-70) + 0.4 * temperatureC. Adjusting density changes its base value."
+  }
+}
+
+
+

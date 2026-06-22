@@ -1,0 +1,52 @@
+{
+  "graph_id": "chain_4_nodes",
+  "description": "Long chain: A -> B -> C -> D (Sequential causal chain with hybrid nodes)",
+  "nodes": {
+    "A": {
+      "is_controllable": true,
+      "property_name": "temperatureC",
+      "base_value": {
+        "type": "uniform",
+        "min": 10.0,
+        "max": 50.0
+      }
+    },
+    "B": {
+      "is_controllable": true,
+      "property_name": "moisture",
+      "computation": "base + coeff_ab * A",
+      "base_value": {
+        "type": "uniform",
+        "min": 5.0,
+        "max": 15.0
+      }
+    },
+    "C": {
+      "is_controllable": true,
+      "property_name": "density",
+      "computation": "base + coeff_bc * B",
+      "base_value": {
+        "type": "uniform",
+        "min": 10.0,
+        "max": 30.0
+      }
+    },
+    "D": {
+      "is_controllable": false,
+      "property_name": "resonanceFreq",
+      "computation": "base_d + coeff_cd * C"
+    }
+  },
+  "edges": [
+    {"from": "A", "to": "B"},
+    {"from": "B", "to": "C"},
+    {"from": "C", "to": "D"}
+  ],
+  "params": {
+    "coeff_ab": 0.5,
+    "coeff_bc": 1.2,
+    "base_d": 500.0,
+    "coeff_cd": 15.0
+  }
+}
+

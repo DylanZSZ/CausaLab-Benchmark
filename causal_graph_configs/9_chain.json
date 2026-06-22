@@ -1,0 +1,150 @@
+{
+  "graph_id": "9_chain",
+  "description": "Chain structure: temperatureC -> moisture -> density -> quantumSize -> radiation -> viscosity -> conductivity -> opacity -> resonanceFreq",
+  "nodes": {
+    "temperatureC": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "temperatureC",
+      "display_name": "Temperature (°C)",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "comment": "Root cause - controllable but not directly observable"
+    },
+    "moisture": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "moisture",
+      "display_name": "Moisture",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "computation": "base_moisture + coeff_temp_moisture * temperatureC",
+      "comment": "Mediator - affected by temperatureC, affects density"
+    },
+    "density": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "density",
+      "display_name": "Density",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "computation": "base_density + coeff_moisture_density * moisture",
+      "comment": "Mediator - affected by moisture, affects quantumSize"
+    },
+    "quantumSize": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "quantumSize",
+      "display_name": "Quantum Size",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "computation": "base_quantum + coeff_density_quantum * density",
+      "comment": "Mediator - affected by density, affects radiation"
+    },
+    "radiation": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "radiation",
+      "display_name": "Radiation",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "computation": "base_radiation + coeff_quantum_radiation * quantumSize",
+      "comment": "Mediator - affected by quantumSize, affects viscosity"
+    },
+    "viscosity": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "viscosity",
+      "display_name": "Viscosity",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "computation": "base_viscosity + coeff_radiation_viscosity * radiation",
+      "comment": "Mediator - affected by radiation, affects conductivity"
+    },
+    "conductivity": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "conductivity",
+      "display_name": "Conductivity",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "computation": "base_conductivity + coeff_viscosity_conductivity * viscosity",
+      "comment": "Mediator - affected by viscosity, affects opacity"
+    },
+    "opacity": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "opacity",
+      "display_name": "Opacity",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "computation": "base_opacity + coeff_conductivity_opacity * conductivity",
+      "comment": "Mediator - affected by conductivity, affects resonanceFreq"
+    },
+    "resonanceFreq": {
+      "is_controllable": false,
+      "observable": true,
+      "property_name": "resonanceFreq",
+      "display_name": "Resonance Frequency (Hz)",
+      "computation": "base_freq + coeff_opacity_freq * opacity",
+      "comment": "End effect - only observable outcome"
+    }
+  },
+  "edges": [
+    {"from": "temperatureC", "to": "moisture"},
+    {"from": "moisture", "to": "density"},
+    {"from": "density", "to": "quantumSize"},
+    {"from": "quantumSize", "to": "radiation"},
+    {"from": "radiation", "to": "viscosity"},
+    {"from": "viscosity", "to": "conductivity"},
+    {"from": "conductivity", "to": "opacity"},
+    {"from": "opacity", "to": "resonanceFreq"}
+  ],
+  "params": {
+    "base_moisture": 20.0,
+    "coeff_temp_moisture": 1.0,
+    "base_density": 20.0,
+    "coeff_moisture_density": 1.0,
+    "base_quantum": 25.0,
+    "coeff_density_quantum": 1.0,
+    "base_radiation": 30.0,
+    "coeff_quantum_radiation": 1.0,
+    "base_viscosity": 25.0,
+    "coeff_radiation_viscosity": 1.0,
+    "base_conductivity": 28.0,
+    "coeff_viscosity_conductivity": 1.0,
+    "base_opacity": 22.0,
+    "coeff_conductivity_opacity": 1.0,
+    "base_freq": 900.0,
+    "coeff_opacity_freq": 1.0
+  },
+  "notes": {
+    "causal_structure": "temperatureC -> moisture -> density -> quantumSize -> radiation -> viscosity -> conductivity -> opacity -> resonanceFreq (chain)"
+  },
+  "budget": 36
+}
+

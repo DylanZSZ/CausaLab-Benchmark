@@ -1,0 +1,38 @@
+{
+  "graph_id": "2_chain",
+  "description": "Chain structure: moisture -> resonanceFreq (Sequential causation)",
+  "nodes": {
+    "moisture": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "moisture",
+      "display_name": "Moisture",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "comment": "Mediator - affected by temperatureC, affects resonanceFreq"
+    },
+    "resonanceFreq": {
+      "is_controllable": false,
+      "observable": true,
+      "property_name": "resonanceFreq",
+      "display_name": "Resonance Frequency (Hz)",
+      "computation": "base_freq + coeff_moisture_freq * moisture",
+      "comment": "End effect - only observable outcome"
+    }
+  },
+  "edges": [
+    {"from": "moisture", "to": "resonanceFreq"}
+  ],
+  "params": {
+    "base_moisture": 20.0,
+    "base_freq": 900.0,
+    "coeff_moisture_freq": 3.0
+  },
+  "notes": {
+    "causal_structure": "moisture -> resonanceFreq (chain)"
+  },
+  "budget": 4
+}

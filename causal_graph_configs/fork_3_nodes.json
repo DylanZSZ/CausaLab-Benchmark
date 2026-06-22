@@ -1,0 +1,39 @@
+{
+  "graph_id": "fork_3_nodes",
+  "description": "Fork structure: A -> B, A -> C (e.g., Temperature affects both Frequency and Moisture)",
+  "nodes": {
+    "A": {
+      "is_controllable": true,
+      "property_name": "temperatureC",
+      "base_value": {
+        "type": "uniform",
+        "min": 10.0,
+        "max": 50.0
+      }
+    },
+    "B": {
+      "is_controllable": false,
+      "property_name": "resonanceFreq",
+      "computation": "base_b + coeff_ab * A"
+    },
+    "C": {
+      "is_controllable": false,
+      "property_name": "moisture",
+      "computation": "base_c + coeff_ac * A"
+    }
+  },
+  "edges": [
+    {"from": "A", "to": "B"},
+    {"from": "A", "to": "C"}
+  ],
+  "params": {
+    "base_b": 1000.0,
+    "coeff_ab": 50.0,
+    "base_c": 10.0,
+    "coeff_ac": 0.5
+  }
+}
+
+
+
+

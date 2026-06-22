@@ -1,0 +1,242 @@
+{
+  "suites": [
+    {
+      "name": "oracle_main",
+      "settings": [
+        {
+          "name": "4nodes_main",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes_main",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_oracle_4nodes_main.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini"
+          }
+        },
+        {
+          "name": "6nodes_main",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/6nodes_main",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_oracle_6nodes_main.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini"
+          }
+        }
+      ]
+    },
+    {
+      "name": "oracle_scaling_4nodes",
+      "settings": [
+        {
+          "name": "3o0i",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes/scaling/3o0i",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_scaling_oracle_suite.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini",
+            "NODE_COUNT": "4",
+            "ONLY_SETTINGS": "3o0i"
+          }
+        },
+        {
+          "name": "6o0i",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes/scaling/6o0i",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_scaling_oracle_suite.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini",
+            "NODE_COUNT": "4",
+            "ONLY_SETTINGS": "6o0i"
+          }
+        },
+        {
+          "name": "12o0i",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes/scaling/12o0i",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_scaling_oracle_suite.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini",
+            "NODE_COUNT": "4",
+            "ONLY_SETTINGS": "12o0i"
+          }
+        },
+        {
+          "name": "24o0i",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes/scaling/24o0i",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_scaling_oracle_suite.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini",
+            "NODE_COUNT": "4",
+            "ONLY_SETTINGS": "24o0i"
+          }
+        },
+        {
+          "name": "0o3i",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes/scaling/0o3i",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_scaling_oracle_suite.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini",
+            "NODE_COUNT": "4",
+            "ONLY_SETTINGS": "0o3i"
+          }
+        },
+        {
+          "name": "0o6i",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes/scaling/0o6i",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_scaling_oracle_suite.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini",
+            "NODE_COUNT": "4",
+            "ONLY_SETTINGS": "0o6i"
+          }
+        },
+        {
+          "name": "0o12i",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes/scaling/0o12i",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_scaling_oracle_suite.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini",
+            "NODE_COUNT": "4",
+            "ONLY_SETTINGS": "0o12i"
+          }
+        },
+        {
+          "name": "0o24i",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes/scaling/0o24i",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_scaling_oracle_suite.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini",
+            "NODE_COUNT": "4",
+            "ONLY_SETTINGS": "0o24i"
+          }
+        },
+        {
+          "name": "3o3i",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes/scaling/3o3i",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_scaling_oracle_suite.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini",
+            "NODE_COUNT": "4",
+            "ONLY_SETTINGS": "3o3i"
+          }
+        },
+        {
+          "name": "3o6i",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes/scaling/3o6i",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_scaling_oracle_suite.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini",
+            "NODE_COUNT": "4",
+            "ONLY_SETTINGS": "3o6i"
+          }
+        },
+        {
+          "name": "3o12i",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes/scaling/3o12i",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_scaling_oracle_suite.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini",
+            "NODE_COUNT": "4",
+            "ONLY_SETTINGS": "3o12i"
+          }
+        },
+        {
+          "name": "3o24i",
+          "root": "output_dir/react_simple-mem/obs_CausalOracle_gpt-5-mini/4nodes/scaling/3o24i",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_scaling_oracle_suite.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini",
+            "NODE_COUNT": "4",
+            "ONLY_SETTINGS": "3o24i"
+          }
+        }
+      ]
+    },
+    {
+      "name": "freqparent_main",
+      "settings": [
+        {
+          "name": "4nodes_main",
+          "root": "output_dir/react_simple-mem/obs_CausalFreqParent_gpt-5-mini/4nodes_main",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_freqparent_4nodes_main.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini"
+          }
+        },
+        {
+          "name": "6nodes_main",
+          "root": "output_dir/react_simple-mem/obs_CausalFreqParent_gpt-5-mini/6nodes_main",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_freqparent_6nodes_main.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini"
+          }
+        }
+      ]
+    },
+    {
+      "name": "hidden_freqnode",
+      "settings": [
+        {
+          "name": "4nodes_hidden_freqnode_n1",
+          "root": "output_dir/react_simple-mem/obs_CausalHiddenFreqNode_gpt-5-mini/4nodes_hidden_freq_node_priority/4nodes_hidden_freqnode_n1",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_hidden_frequency_node_priority_full.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini"
+          }
+        },
+        {
+          "name": "4nodes_hidden_freqnode_n2",
+          "root": "output_dir/react_simple-mem/obs_CausalHiddenFreqNode_gpt-5-mini/4nodes_hidden_freq_node_priority/4nodes_hidden_freqnode_n2",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_hidden_frequency_node_priority_full.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini"
+          }
+        },
+        {
+          "name": "4nodes_hidden_freqnode_n3",
+          "root": "output_dir/react_simple-mem/obs_CausalHiddenFreqNode_gpt-5-mini/4nodes_hidden_freq_node_priority/4nodes_hidden_freqnode_n3",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_hidden_frequency_node_priority_full.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini"
+          }
+        }
+      ]
+    },
+    {
+      "name": "golden_main",
+      "settings": [
+        {
+          "name": "4nodes_main",
+          "root": "output_dir/react_simple-mem/obs_CausalGolden_gpt-5-mini/4nodes_main",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_golden_4nodes_main.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini"
+          }
+        },
+        {
+          "name": "6nodes_main",
+          "root": "output_dir/react_simple-mem/obs_CausalGolden_gpt-5-mini/6nodes_main",
+          "expected_count": 50,
+          "launch_cmd": "bash scripts/experiments/run_react_simple-mem_golden_6nodes_main.sh",
+          "launch_env": {
+            "MODEL": "gpt-5-mini"
+          }
+        }
+      ]
+    }
+  ]
+}

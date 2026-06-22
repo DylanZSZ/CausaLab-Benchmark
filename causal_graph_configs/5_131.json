@@ -1,0 +1,89 @@
+{
+    "graph_id": "5_131",
+    "description": "Chain structure: temperatureC -> moisture -> resonanceFreq (Sequential causation)",
+    "nodes": {
+      "pressure": {
+        "is_controllable": true,
+        "observable": true,
+        "property_name": "pressure",
+        "display_name": "Pressure",
+        "base_value": {
+          "type": "uniform",
+          "min": 15.0,
+          "max": 45.0
+        },
+        "computation": "base_pressure + coeff_temp_pressure * temperatureC",
+        "comment": "Mediator - affected by density, affects resonanceFreq"
+      },
+      "density": {
+        "is_controllable": true,
+        "observable": true,
+        "property_name": "density",
+        "display_name": "Density",
+        "base_value": {
+          "type": "uniform",
+          "min": 15.0,
+          "max": 45.0
+        },
+        "computation": "base_density + coeff_temp_density * temperatureC",
+        "comment": "Mediator - affected by temperatureC, affects resonanceFreq"
+      },
+      "moisture": {
+        "is_controllable": true,
+        "observable": true,
+        "property_name": "moisture",
+        "display_name": "Moisture",
+        "base_value": {
+          "type": "uniform",
+          "min": 15.0,
+          "max": 45.0
+        },
+        "computation": "base_moisture + coeff_temp_moisture * temperatureC",
+        "comment": "Mediator - affected by temperatureC, affects resonanceFreq"
+      },
+      "temperatureC": {
+        "is_controllable": true,
+        "observable": true,
+        "property_name": "temperatureC",
+        "display_name": "Temperature (°C)",
+        "base_value": {
+          "type": "uniform",
+          "min": 15.0,
+          "max": 45.0
+        },
+        "comment": "Root cause - controllable"
+      },
+      "resonanceFreq": {
+        "is_controllable": false,
+        "observable": true,
+        "property_name": "resonanceFreq",
+        "display_name": "Resonance Frequency (Hz)",
+        "computation": "base_freq + coeff_density_freq * density + coeff_moisture_freq * moisture + coeff_pressure_freq * pressure",
+        "comment": "End effect - only observable outcome"
+      }
+    },
+    "edges": [
+      {"from": "temperatureC", "to": "moisture"},
+      {"from": "temperatureC", "to": "density"},
+      {"from": "temperatureC", "to": "pressure"},
+      {"from": "moisture", "to": "resonanceFreq"},
+      {"from": "density", "to": "resonanceFreq"},
+      {"from": "pressure", "to": "resonanceFreq"}
+    ],
+    "params": {
+      "base_density": 20.0,
+      "base_moisture": 20.0,
+      "base_pressure": 20.0,
+      "coeff_temp_density": 2.0,
+      "coeff_temp_moisture": 3.0,
+      "coeff_temp_pressure": 2.0,
+      "base_freq": 900.0,
+      "coeff_density_freq": 3.0,
+      "coeff_moisture_freq": 2.0,
+      "coeff_pressure_freq": 2.0
+    },
+    "notes": {
+      "causal_structure": "temperatureC -> moisture -> density -> resonanceFreq (chain)"
+    },
+    "budget": 16
+  }

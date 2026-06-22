@@ -1,0 +1,69 @@
+{
+  "models": {
+    "action": {
+      "generator_params": {
+        "max_tokens": 8192,
+        "model": "gpt-5-mini",
+        "seed": 0,
+        "stop": [],
+        "temperature": 0.1,
+        "top_p": 0.95,
+        "type": "lite_llm",
+        "use_cache": true
+      },
+      "prompt_file": "agents/recoma/prompts/react_simple_memory_prompt_dsl.txt",
+      "type": "discoveryworld_promptedlm"
+    },
+    "discoveryworld_init": {
+      "next_model": "react",
+      "threadid_offset": 10781,
+      "type": "discoveryworld_loader"
+    },
+    "environment": {
+      "output_dir": "output_dir/react_simple-mem/obs_Causal_gpt-5-mini/4nodes/20260223-2134_dsl/4nodes_0_53calls/seed_1",
+      "type": "discoveryworld_env"
+    },
+    "react": {
+      "action_model": "action",
+      "add_roles": true,
+      "max_history": -1,
+      "max_output_length": 16384,
+      "observation_model": "environment",
+      "type": "discoveryworld_react_memory_controller"
+    }
+  },
+  "reader": {
+    "limit_difficulties": [
+      "Causal"
+    ],
+    "limit_prefixes": [
+      "Reactor Lab Causal"
+    ],
+    "limit_seeds": [
+      1
+    ],
+    "type": "discoveryworld_reader"
+  },
+  "search": {
+    "answerer": {
+      "output_dir": "output_dir/react_simple-mem/obs_Causal_gpt-5-mini/4nodes/20260223-2134_dsl/4nodes_0_53calls/seed_1",
+      "type": "discoveryworld_answerer"
+    },
+    "start_model": "discoveryworld_init",
+    "stopping_conditions": [
+      {
+        "max_env_calls": 53,
+        "type": "max_env_calls"
+      },
+      {
+        "max_llm_calls": 1000,
+        "type": "max_llm_calls"
+      },
+      {
+        "max_llm_cost": 50,
+        "type": "max_llm_cost"
+      }
+    ],
+    "type": "best_first"
+  }
+}

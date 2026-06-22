@@ -1,0 +1,55 @@
+{
+  "graph_id": "3_fork",
+  "description": "Chain structure: temperatureC -> moisture -> resonanceFreq (Sequential causation)",
+  "nodes": {
+    "temperatureC": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "temperatureC",
+      "display_name": "Temperature (°C)",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "comment": "Root cause - controllable but not directly observable"
+    },
+    "moisture": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "moisture",
+      "display_name": "Moisture",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "computation": "base_moisture + coeff_temp_moisture * temperatureC",
+      "comment": "Mediator - affected by temperatureC, affects resonanceFreq"
+    },
+    "resonanceFreq": {
+      "is_controllable": false,
+      "observable": true,
+      "property_name": "resonanceFreq",
+      "display_name": "Resonance Frequency (Hz)",
+      "computation": "base_freq + coeff_temp_freq * temperatureC",
+      "comment": "End effect - only observable outcome"
+    }
+  },
+  "edges": [
+    {"from": "temperatureC", "to": "moisture"},
+    {"from": "temperatureC", "to": "resonanceFreq"}
+  ],
+  "params": {
+    "base_moisture": 20.0,
+    "coeff_temp_moisture": 2.0,
+    "base_freq": 900.0,
+    "coeff_temp_freq": 3.0
+  },
+  "notes": {
+    "causal_structure": "moisture <- temperatureC -> resonanceFreq (fork)"
+  },
+  "budget": 6
+}
+
+

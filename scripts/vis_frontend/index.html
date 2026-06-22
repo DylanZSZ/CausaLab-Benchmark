@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Causal Graph Visualization</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 Dynamic Causal Graph Visualization</h1>
+            <p>Observe how actions propagate through causal relationships</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Left: Folder Selection -->
+            <aside class="sidebar">
+                <div class="section">
+                    <h2>📁 Select Experiment</h2>
+                    <div class="folder-search">
+                        <input type="text" id="searchBox" placeholder="Search folders..." />
+                    </div>
+                    <div id="folderList" class="folder-list">
+                        <div class="loading">Loading...</div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Right: Visualization Area -->
+            <main class="visualization-area">
+                <!-- Control Panel -->
+                <div class="controls">
+                    <button id="playBtn" class="btn btn-primary" disabled>
+                        <span>▶</span> Play
+                    </button>
+                    <button id="pauseBtn" class="btn btn-secondary" disabled>
+                        <span>⏸</span> Pause
+                    </button>
+                    <button id="resetBtn" class="btn btn-secondary" disabled>
+                        <span>⏮</span> Reset
+                    </button>
+                    <button id="prevBtn" class="btn btn-secondary" disabled>
+                        <span>⏪</span> Previous
+                    </button>
+                    <button id="nextBtn" class="btn btn-secondary" disabled>
+                        <span>⏩</span> Next
+                    </button>
+                    
+                    <div class="speed-control">
+                        <label>Speed:</label>
+                        <select id="speedSelect">
+                            <option value="2000">0.5x</option>
+                            <option value="1000" selected>1x</option>
+                            <option value="500">2x</option>
+                            <option value="250">4x</option>
+                        </select>
+                    </div>
+                    
+                    <div class="step-indicator">
+                        <span id="currentStep">0</span> / <span id="totalSteps">0</span>
+                    </div>
+                </div>
+
+                <!-- Current Action Display -->
+                <div id="currentAction" class="current-action">
+                    <div class="no-data">Please select an experiment folder to begin visualization</div>
+                </div>
+
+                <div class="top-row">
+                    <!-- Causal Graph Display -->
+                    <div class="graph-container">
+                        <h3>Causal Graph Structure</h3>
+                        <svg id="causalGraph"></svg>
+                        <h3 id="hypothesisGraphTitle">Model Hypothesis Graph</h3>
+                        <svg id="hypothesisGraph"></svg>
+                    </div>
+
+                    <div class="metrics-column">
+                        <!-- Edge Metrics Chart -->
+                        <div class="metrics-container">
+                            <h3>Edge Accuracy & Recall Over Time</h3>
+                            <div id="metricsChart" class="metrics-chart">
+                                <div class="no-data">Waiting for data...</div>
+                            </div>
+                        </div>
+
+                        <!-- Frequency Edge Metrics Chart -->
+                        <div class="metrics-container">
+                            <h3>Frequency Edge Accuracy & Recall</h3>
+                            <div id="metricsChartFrequency" class="metrics-chart">
+                                <div class="no-data">Waiting for data...</div>
+                            </div>
+                        </div>
+
+                        <!-- Weight Accuracy Chart -->
+                        <div class="metrics-container">
+                            <h3>Weight Accuracy Over Time</h3>
+                            <div id="metricsChartWeight" class="metrics-chart">
+                                <div class="no-data">Waiting for data...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Property Values Table -->
+                <div class="properties-container">
+                    <h3>Property Value Changes</h3>
+                    <div id="propertiesTable" class="properties-table">
+                        <div class="no-data">Waiting for data...</div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+

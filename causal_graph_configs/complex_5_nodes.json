@@ -1,0 +1,58 @@
+{
+  "graph_id": "complex_5_nodes",
+  "description": "Complex 5-node graph: A -> B, A -> C, B -> D, C -> D, E (independent)",
+  "nodes": {
+    "A": {
+      "is_controllable": true,
+      "property_name": "temperatureC",
+      "base_value": {
+        "type": "uniform",
+        "min": 10.0,
+        "max": 50.0
+      }
+    },
+    "E": {
+      "is_controllable": true,
+      "property_name": "density",
+      "base_value": {
+        "type": "uniform",
+        "min": 10.0,
+        "max": 70.0
+      }
+    },
+    "B": {
+      "is_controllable": false,
+      "property_name": "moisture",
+      "computation": "base_b + coeff_ab * A"
+    },
+    "C": {
+      "is_controllable": false,
+      "property_name": "quantumSize",
+      "computation": "base_c + coeff_ac * A"
+    },
+    "D": {
+      "is_controllable": false,
+      "property_name": "resonanceFreq",
+      "computation": "base_d + coeff_bd * B + coeff_cd * C"
+    }
+  },
+  "edges": [
+    {"from": "A", "to": "B"},
+    {"from": "A", "to": "C"},
+    {"from": "B", "to": "D"},
+    {"from": "C", "to": "D"}
+  ],
+  "params": {
+    "base_b": 10.0,
+    "coeff_ab": 0.5,
+    "base_c": 20.0,
+    "coeff_ac": 0.8,
+    "base_d": 500.0,
+    "coeff_bd": 20.0,
+    "coeff_cd": 15.0
+  }
+}
+
+
+
+

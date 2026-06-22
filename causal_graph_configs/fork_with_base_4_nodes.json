@@ -1,0 +1,48 @@
+{
+  "graph_id": "fork_with_base_4_nodes",
+  "description": "Fork with base variables: A -> B, A -> C, Base_C -> C (Temperature affects Frequency and derived Moisture, but Moisture also has a controllable base)",
+  "nodes": {
+    "A": {
+      "is_controllable": true,
+      "property_name": "temperatureC",
+      "base_value": {
+        "type": "uniform",
+        "min": 10.0,
+        "max": 50.0
+      }
+    },
+    "Base_C": {
+      "is_controllable": true,
+      "property_name": "moistureBase",
+      "base_value": {
+        "type": "uniform",
+        "min": 5.0,
+        "max": 25.0
+      }
+    },
+    "B": {
+      "is_controllable": false,
+      "property_name": "resonanceFreq",
+      "computation": "base_b + coeff_ab * A"
+    },
+    "C": {
+      "is_controllable": false,
+      "property_name": "moisture",
+      "computation": "Base_C + coeff_ac * A"
+    }
+  },
+  "edges": [
+    {"from": "A", "to": "B"},
+    {"from": "A", "to": "C"},
+    {"from": "Base_C", "to": "C"}
+  ],
+  "params": {
+    "base_b": 1000.0,
+    "coeff_ab": 50.0,
+    "coeff_ac": 0.5
+  }
+}
+
+
+
+

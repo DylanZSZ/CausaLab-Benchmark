@@ -1,0 +1,265 @@
+{
+  "@context": {
+    "@language": "en",
+    "sc": "https://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "rai": "http://mlcommons.org/croissant/RAI/",
+    "prov": "http://www.w3.org/ns/prov#"
+  },
+  "@type": "sc:Dataset",
+  "name": "CausaLab Causal Graph Configuration Dataset",
+  "description": "Synthetic causal graph configuration suites used to evaluate agentic causal discovery and intervention planning in a crystal-reactor environment. Released alongside the CausaLab paper (NeurIPS 2026 Datasets & Benchmarks) by Dylan Zhang and collaborators at UIUC, Tsinghua, CMU, University of Chicago, and Adobe.",
+  "url": "https://github.com/DylanZSZ/CausaLab-Benchmark/tree/main/release/causalab_dataset",
+  "license": "https://spdx.org/licenses/Apache-2.0.html",
+  "conformsTo": "http://mlcommons.org/croissant/1.1",
+  "distribution": [
+    {
+      "@type": "cr:FileObject",
+      "@id": "3nodes_jsonl",
+      "name": "3nodes.jsonl",
+      "description": "Main 3-node graph suite",
+      "contentUrl": "data/3nodes.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "8b6354ec8bd4482976dc5154f8dd5a26641f829f2d1cf45edb6002c744c3c73f"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_jsonl",
+      "name": "4nodes.jsonl",
+      "description": "Main 4-node graph suite; baseline for several ablations and all 4-node scaling runs",
+      "contentUrl": "data/4nodes.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "cfdb5b727d011f1ee563ffde331b9915422a418eec035a331ef6f727054c1166"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "5nodes_jsonl",
+      "name": "5nodes.jsonl",
+      "description": "Main 5-node graph suite; over-confidence diagnostics",
+      "contentUrl": "data/5nodes.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "7182105d34fc1fa886c856b080f76fe6bd5a0ba48977101c22727999637acce3"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "6nodes_jsonl",
+      "name": "6nodes.jsonl",
+      "description": "Main 6-node graph suite; all 6-node scaling runs",
+      "contentUrl": "data/6nodes.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "61da103069eff2abb47d7abde4f2fcee43b3c6f93f86f92496f1a0aeed3e52d3"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "7nodes_jsonl",
+      "name": "7nodes.jsonl",
+      "description": "Main 7-node graph suite",
+      "contentUrl": "data/7nodes.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "283a52d9e600700f8cbbe28a0b557aaae79bf2e7b208b3ea0f6d3353366da760"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_quad_hard_jsonl",
+      "name": "4nodes_quad_hard.jsonl",
+      "description": "Matched 4-node hard-quadratic mechanism suite",
+      "contentUrl": "data/4nodes_quad_hard.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "4fcef991cc115ff9b8960861f436410485f5815a97f216a69d81154cfcda4e84"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_hidden_n1_jsonl",
+      "name": "4nodes_hidden_n1.jsonl",
+      "description": "Hidden-noise count sweep with one affected observable node",
+      "contentUrl": "data/4nodes_hidden_n1.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "6e67be560e9b55325d9e8d7a606b2069d4c3767f56f5285e43aa3bb5fc5eae59"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_hidden_n2_jsonl",
+      "name": "4nodes_hidden_n2.jsonl",
+      "description": "Hidden-noise count sweep with two affected observable nodes",
+      "contentUrl": "data/4nodes_hidden_n2.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "b3bf2f74a8ce12b28825d54047afbc000a365993ebc56573fbb6c3764a1268a3"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_hidden_n3_jsonl",
+      "name": "4nodes_hidden_n3.jsonl",
+      "description": "Hidden-noise count sweep with three affected observable nodes",
+      "contentUrl": "data/4nodes_hidden_n3.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "bee9e2e1c52ba00e47874d76d044a478478ac6e1a3cf707c1010a610db3ea53a"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_hidden_vrange_pm0p5_jsonl",
+      "name": "4nodes_hidden_vrange_pm0p5.jsonl",
+      "description": "Hidden-noise range sweep with perturbation values +/-0.5",
+      "contentUrl": "data/4nodes_hidden_vrange_pm0p5.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "6d9194341722852459b18937fe229208217a915c3513c27c89ed9e55232adb31"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_hidden_vrange_pm5_jsonl",
+      "name": "4nodes_hidden_vrange_pm5.jsonl",
+      "description": "Hidden-noise range sweep with perturbation values +/-5",
+      "contentUrl": "data/4nodes_hidden_vrange_pm5.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "6e67be560e9b55325d9e8d7a606b2069d4c3767f56f5285e43aa3bb5fc5eae59"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_hidden_vrange_pm50_jsonl",
+      "name": "4nodes_hidden_vrange_pm50.jsonl",
+      "description": "Hidden-noise range sweep with perturbation values +/-50",
+      "contentUrl": "data/4nodes_hidden_vrange_pm50.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "9a1a09ca3d98425cd227b4d13044b62693d6cb2848c9753503fbfccefeee9d26"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_hidden_freqnode_n1_jsonl",
+      "name": "4nodes_hidden_freqnode_n1.jsonl",
+      "description": "Hidden-freqnode sweep with one affected node including resonance frequency",
+      "contentUrl": "data/4nodes_hidden_freqnode_n1.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "fc1de218ea89ff63c3c9a42919d8e469f707a9cef7f40f8069735826021276d4"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_hidden_freqnode_n2_jsonl",
+      "name": "4nodes_hidden_freqnode_n2.jsonl",
+      "description": "Hidden-freqnode sweep with two affected nodes including resonance frequency",
+      "contentUrl": "data/4nodes_hidden_freqnode_n2.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "9748dc2fa5bfcf934a952c7523889ce48665b6d260f63e1c472ff0d2af5c7781"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_hidden_freqnode_n3_jsonl",
+      "name": "4nodes_hidden_freqnode_n3.jsonl",
+      "description": "Hidden-freqnode sweep with three affected nodes including resonance frequency",
+      "contentUrl": "data/4nodes_hidden_freqnode_n3.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "02c5076acf210f2cd071450714884112f2698fc60bc9e0e1057863bcffb3a8e2"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_freqparent_jsonl",
+      "name": "4nodes_freqparent.jsonl",
+      "description": "4-node FreqParent follow-up suite",
+      "contentUrl": "data/4nodes_freqparent.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "848279415890cc502ccdd4bd57da4def08ce7bf8a359757bebd649dcacfb76e2"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "6nodes_freqparent_jsonl",
+      "name": "6nodes_freqparent.jsonl",
+      "description": "6-node FreqParent follow-up suite",
+      "contentUrl": "data/6nodes_freqparent.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "5c967d588d662145ce8eb620ac7a07bbb0092a75b96a3b888289cfedee785d76"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "4nodes_golden_jsonl",
+      "name": "4nodes_golden.jsonl",
+      "description": "4-node Golden low-MEC trace follow-up suite",
+      "contentUrl": "data/4nodes_golden.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "71781ac018eddbdba79584582d35ca7857ad8279370b2f5c0bca11724dd45770"
+    },
+    {
+      "@type": "cr:FileObject",
+      "@id": "6nodes_golden_jsonl",
+      "name": "6nodes_golden.jsonl",
+      "description": "6-node Golden low-MEC trace follow-up suite",
+      "contentUrl": "data/6nodes_golden.jsonl",
+      "encodingFormat": "application/jsonlines",
+      "sha256": "bf3688d3a45d53dc2f0013190196ff4441dde6e07ecfa7d7df7704e578a7ac09"
+    }
+  ],
+  "recordSet": [
+    {
+      "@type": "cr:RecordSet",
+      "@id": "causal_graph_config_records",
+      "name": "causal_graph_config_records",
+      "description": "Each JSONL line is one synthetic causal graph configuration used as an evaluation task.",
+      "field": [
+        {
+          "@type": "cr:Field",
+          "name": "graph_id",
+          "description": "Unique graph/task identifier within a suite.",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "description",
+          "description": "Natural-language description of the causal graph family and edge count.",
+          "dataType": "sc:Text"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "nodes",
+          "description": "Mapping from variable names to controllability, observability, display metadata, base values, and structural equations.",
+          "dataType": "cr:JSON"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "edges",
+          "description": "Directed causal edges as from/to pairs.",
+          "dataType": "cr:JSON"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "params",
+          "description": "Numerical parameters used by the structural equations.",
+          "dataType": "cr:JSON"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "budget",
+          "description": "Default intervention budget for the graph suite.",
+          "dataType": "sc:Integer"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "hidden_variable",
+          "description": "Optional hidden perturbation configuration for hidden-noise suites.",
+          "dataType": "cr:JSON"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "bootstrap_past_data",
+          "description": "Optional static intervention traces for Golden suites.",
+          "dataType": "cr:JSON"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "frequency_can_be_parent",
+          "description": "Optional flag for FreqParent suites where resonance frequency may have outgoing edges.",
+          "dataType": "sc:Boolean"
+        },
+        {
+          "@type": "cr:Field",
+          "name": "quadratic_metadata",
+          "description": "Optional metadata for hard-quadratic mechanism suites.",
+          "dataType": "cr:JSON"
+        }
+      ]
+    }
+  ],
+  "rai:hasSyntheticData": true,
+  "rai:dataUseCases": "Intended for evaluating causal graph discovery, intervention planning, and target-frequency prediction in synthetic agentic environments.",
+  "rai:dataLimitations": "The dataset consists of synthetic graph configurations and does not represent real physical systems. Performance on these tasks should not be interpreted as evidence of real-world scientific discovery ability.",
+  "rai:dataBiases": "Graph topologies, variable names, coefficients, hidden perturbations, and observation/intervention budgets reflect controlled generator choices. Models may exploit these synthetic regularities.",
+  "rai:personalSensitiveInformation": "The dataset contains no personal or sensitive information.",
+  "rai:dataSocialImpact": "The dataset supports controlled evaluation of causal reasoning behavior. Misuse risk is limited by its synthetic nature, but results should be reported as benchmark behavior rather than real-world causal competence.",
+  "prov:wasGeneratedBy": "Synthetic causal graph generators and follow-up suite generation scripts described in the CausaLab paper. Authored by Dylan Zhang and collaborators (UIUC, Tsinghua, CMU, University of Chicago, Adobe)."
+}

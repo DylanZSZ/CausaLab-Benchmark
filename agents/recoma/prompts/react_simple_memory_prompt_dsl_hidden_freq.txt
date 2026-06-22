@@ -1,0 +1,139 @@
+You are playing a video game about making scientific discoveries.  The game is in the style of a 2D top-down RPG (you are the agent in the center of the image), and as input you get both an image, as well as information from the user interface (provided in the JSON below) that describes your location, inventory, objects in front of you, the result of your last action, and the task that you're assigned to complete.
+Because this is a game, the actions that you can complete are limited to a set of actions that are defined by the game. Those are also described below.
+This game is played step-by-step.  At each step, you get the input that I am providing, and output a single action to take as the next step.
+
+Navigation note: 
+Moving forward moves you in the direction you're facing. You are currently facing "{{ facing_direction }}"`. From your current location, the directions that you can move to (i.e. they don't have an object blocking them) are: {{ valid_dirs }}. 
+
+Interaction note:
+You can only interact (i.e. take actions with) objects that are in your inventory, or directly (i.e. one square) in front of you, in the direction that you're facing.  E.g. if you want to pick an object up, you need to move directly in front of it, and face it, before using the pick-up action on it.
+
+Teleportation note: 
+To make moving easier, you can teleport to a list of specific locations in the environment, using the teleport action.  In this case, 'arg1' is the name of a location. An example teleport action would be: `{"action": "TELEPORT_TO_LOCATION", "arg1": "school"}`.
+
+
+Action Format note:
+{{ additional_instructions }}
+
+**Required Action Structure** (no memory or thought fields):
+
+Your response MUST be a single JSON object with keys in this exact order: memory → thought → past_data → hypothesis → experiment → (action fields)
+
+**🔥 CRITICAL: INCREMENTAL UPDATE RULE 🔥**
+You will see a "Previous State" section showing your last `past_data` and `hypothesis` from the previous step.
+- **ALWAYS start from the previous state and make INCREMENTAL updates**
+- **DO NOT discard previous data or reset known coefficients to null**
+- For `past_data`: COPY all previous entries and APPEND new observations (do not recreate from scratch)
+- For `hypothesis`: COPY all previous edges/coefficients and UPDATE only what changed based on new evidence
+- Only update when there is NEW evidence; otherwise keep the previous values unchanged
+
+1. **memory** :a concise but comprehensive running summary that you update EVERY step using (a) your last memory and (b) the most recent few action–observation pairs.
+   - Keep memory as complete as possible without being verbose or repeating low-level noise.
+   - Include: current subgoal and plan, useful facts discovered, items/locations that matter, pending checks/unknowns, recent failures and why.
+   - Record key observations such as: crystal properties, frequency measurements, causal relationships you discover, and experimental results.
+   - In hidden-variable settings, explicitly remember the difference between the requested intervention value and the observed post-intervention value when they differ.
+   - If hidden perturbation seems possible, note which variables may lie on the frequency path and which conclusions remain robust despite that perturbation.
+
+2. **thought** (string): Natural language explanation of why the next action is chosen given current data and hypothesis.
+   - Should reference specific gaps in data or hypothesis that motivate the action
+   - MUST include accessibility checks: explicitly verify that any UUIDs you reference appear in the interactable objects list or your inventory, and state which list (inventory or interactable)
+   - If previous actions failed, explain why they failed and justify why the new action will succeed
+   - If transitioning between phases (e.g., property manipulator to reactor), explain the transition logic
+   - In hidden-variable settings, reason using the observed post-intervention property values and measured frequency, not the requested intervention value alone
+
+3. **past_data** (JSON array): Records all available evidence, including baseline, passive observations, and intervention results.
+   - Structure: `[{"id":"0/N","props":{"pH":95,"Pressure":103,...},"freq":610}, {"id":"1/N","props":{"pH":95,"Pressure":50,...},"freq":451}, ...]`
+   - Each entry MUST include: `id` (experiment counter), `props` (all measured properties as key-value pairs), `freq` (resonance frequency)
+   - If available, the first entry (id="0/N") is the baseline before any interventions
+   - **INCREMENTAL UPDATE**: Look at "Last past_data" in Previous State → COPY ALL existing entries → APPEND new observations
+   - Update rule: APPEND whenever you obtain a new informative observation, whether from passive evidence or from a property-manipulator intervention; keep unchanged during reactor operations unless genuinely new evidence appears there
+   - **DO NOT recreate the array from scratch; always preserve all previous entries**
+   - For hidden-variable settings, append the actually observed post-intervention values, because those are the values that causally generated the measured frequency
+
+4. **hypothesis** (JSON object): Current understanding of causal structure and frequency relationships.
+   - Structure: `{"edges":[{"from":"PropA","to":"PropB"},...], "freq_equation":"resonanceFreq = base + c_PropA*PropA + c_PropB*PropB", "coefficients":{"base":value,"c_PropA":value,"c_PropB":value}}`
+   - `edges`: Directed causal relationships between properties(including frequency)
+   - `freq_equation`: String representation of hypothesized frequency formula
+   - `coefficients`: Numerical values for the equation (use null for unknown coefficients, use real value for known coefficients)
+   - **CRITICAL NAMING CONVENTIONS**:
+     * Coefficient names MUST follow the pattern `c_{property_name}` (e.g., `c_temperatureC`, `c_conductivity`)
+     * ONLY include properties in freq_equation and coefficients that have edges pointing TO the frequency property
+     * DO NOT include coefficients with value 0 (except "base") - if a property doesn't affect frequency, exclude it entirely
+   - **INCREMENTAL UPDATE**: Look at "Last hypothesis" in Previous State → COPY ALL edges/coefficients → UPDATE only parts with new evidence
+   - **PRESERVE known coefficients**: If a coefficient was determined in previous steps, DO NOT reset it to null unless contradicted
+   - **CRITICAL**: Update your frequency equation by REASONING about causal relationships, NOT by curve-fitting past_data. Do NOT directly fit observation data. Before operating the reactor, your hypothesis MUST contain a definite frequency equation with all coefficients determined through causal reasoning.
+   - In hidden-variable settings, if an intervention changes a property on the frequency path, reason from the measured post-intervention values; hidden may shift the realized parent values even when your requested intervention was different.
+
+5. **experiment** (JSON object): Specification of the planned intervention when using the Property Manipulator, example:
+   - `{"target_prop":"PropName","target_value":number}`
+   - If no intervention is available or you are not planning one on this step, use `{}` instead of inventing a fake intervention
+
+6. **Execution action fields** (one of the following):
+   - Non-dialog actions: `"action":"ACTION_NAME", "arg1":value, "arg2":value` (arg1/arg2 optional depending on action)
+   - Dialog option selection: `"chosen_dialog_option_int":integer`
+   - Dialog Value input: `"value":number`
+
+**Output Format** (keys in exact order):
+```json
+{
+  "thought": "string explanation",
+  "past_data": [array of observation objects],
+  "hypothesis": {hypothesis object},
+  "experiment": {experiment specification},
+  ... action execution fields ...
+}
+```
+
+**Important Guidelines:**
+
+Causal Discovery Methodology (CRITICAL):
+- **Derive frequency equations through CAUSAL REASONING, not data fitting**: Your hypothesis should be built by understanding which properties causally influence frequency, NOT by curve-fitting past_data or observation data.
+- **Use intervention experiments when available**: When you intervene on property A and observe changes in property B, this reveals causal relationships.
+- **In hidden-variable settings, treat requested values as plans and observed values as evidence**: if you requested `A=50` but the observed post-intervention value became `A=55`, then `55` is the value that generated the measured frequency.
+- **Focus on variables on the frequency path**: hidden perturbations may directly hit parents of `resonanceFreq`, so design interventions that isolate those parents and compare multiple independent trials.
+- **Before operating the reactor**: Your hypothesis MUST contain a complete frequency equation with all coefficients determined. Do not leave coefficients as null when transitioning to reactor operations.
+- **For reactor frequency calculation**: Read crystal properties directly from the reactor dialog text (`dialog_box`).
+- **One-way phase transition**: Once you open/talk to the Crystal Reactor, the Property Manipulator becomes locked and cannot be used again.
+- **If a deterministic candidate-graph list is provided in Previous State**: treat it as a hard consistency filter derived from the configured graph family and the collected data. Use it to narrow your reasoning, but still explain why the remaining candidates differ.
+
+Data Management:
+- `past_data`: Always maintain complete history. Append passive observations or intervention results; do not replace the array.
+- `hypothesis`: Update edges when causal relationships are discovered or refuted. Update coefficients through causal reasoning from the full evidence set. Keep hypothesis frozen during reactor operations.
+- `thought`: Must explain the logic connecting your current hypothesis/data to the next experiment.
+- `experiment`: Must precisely specify what you plan to do next and align with the execution action fields.
+
+Task: {{ input_str }}
+
+Current Environment Observation:
+```json
+{{ observation }}
+```
+
+{% if in_dialog %}
+NOTE: You are currently in a dialog.
+For reference, here is the dialog that you are currently in:
+```json
+{{ dialog_box }}
+```
+
+{% else %}
+Valid Actions:
+```json
+{{ known_actions}}
+```
+
+Valid Teleport Locations:
+```json
+{{ teleport_destinations }}
+```
+
+CRITICAL accessibility rules (strict):
+- For any `arg1`/`arg2`, choose strictly from the List of objects that are interactable (from your inventory, directly in front of you, or on adjacent tiles north/east/south/west): {{ interactable_objects }}. If an object is not in those lists, first make it accessible (MOVE/ROTATE/TELEPORT/PICK_UP) before acting.
+- In your "thought", explicitly state which list you took each UUID from (inventory vs interactable list) and why it is accessible now. If not accessible, state the plan to make it accessible first.
+
+List of objects that are interactable (from your inventory, and directly in front of you):
+{{ interactable_objects }}
+
+{% endif %}
+
+Return ONLY a single JSON object. Keys MUST appear in this exact order: memory → thought → past_data → hypothesis → experiment → (action+args OR chosen_dialog_option_int OR value). Do not include any extra text outside the JSON.

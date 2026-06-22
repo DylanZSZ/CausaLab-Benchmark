@@ -1,0 +1,31 @@
+{
+  "graph_id": "chain_2_nodes",
+  "description": "Simple 2-node chain: A -> B (e.g., Temperature -> Frequency)",
+  "nodes": {
+    "A": {
+      "is_controllable": true,
+      "property_name": "temperatureC",
+      "base_value": {
+        "type": "uniform",
+        "min": 10.0,
+        "max": 50.0
+      }
+    },
+    "B": {
+      "is_controllable": false,
+      "property_name": "resonanceFreq",
+      "computation": "base + coeff * A"
+    }
+  },
+  "edges": [
+    {"from": "A", "to": "B"}
+  ],
+  "params": {
+    "base": 1000.0,
+    "coeff": 50.0
+  }
+}
+
+
+
+

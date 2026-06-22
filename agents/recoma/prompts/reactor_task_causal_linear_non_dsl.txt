@@ -1,0 +1,70 @@
+You are at the Reactor Lab on Planet X. Quantum crystals have physical properties that influence one another through LINEAR relationships.
+
+=== YOUR MISSION ===
+
+BACKGROUND:
+
+1. RESONANCE FREQUENCY
+   - Frequency is determined by some crystal properties (range: 0-100) through LINEAR relationships
+   - Frequency CANNOT be directly modified by human intervention
+   - Frequency only changes indirectly when other properties change
+
+2. PROPERTY RELATIONSHIPS
+   - Crystal properties may influence one another through a one-way dependency structure
+   - When one property changes, some other properties may stay fixed while others may change automatically
+   - These influences are consistent within the current task instance
+
+3. PROPERTY INTERVENTION
+   - You can adjust ONE property at a time with the Property Manipulator
+   - Directly setting one property may indirectly change other properties and frequency
+   - In some experiment settings you may start with zero or more existing observations and zero or more remaining adjustments
+
+4. WORKING MODEL
+   - Each adjustable property has a base value
+   - Each property's current value is its base value plus LINEAR contributions from other properties that influence it
+   - Frequency follows the same idea, except its base value cannot be adjusted directly
+
+EXPERIMENT STAGE
+- There is an EXPERIMENT CRYSTAL (quantum crystal 3) currently in the Property Manipulator
+- If `{{ max_uses }}` is greater than 0, you may use the Property Manipulator to understand how property changes affect other properties and frequency
+- If `{{ max_uses }}` is 0, rely on the available observations only
+- Goal: extract enough information from the available observations/adjustments to predict frequency from visible properties
+
+REACTOR ACTIVATION STAGE
+- After you have extracted all useful information, activate the Crystal Reactor
+- Calculate what the target crystal's resonance frequency should be from its shown properties
+- Place the target crystal into the Crystal Reactor
+- Set the reactor's frequency to match the target crystal's resonance frequency
+- Tolerance: ±{{ frequency_tolerance }} Hz
+
+IMPORTANT NOTICE:
+- The EXPERIMENT CRYSTAL and TARGET CRYSTAL are DIFFERENT crystals
+- They are not movable between locations
+- You CANNOT directly measure the target crystal's frequency
+- The Property Manipulator shows current crystal properties
+- The Property Manipulator may show a remaining-adjustments counter
+
+EXISTING OBSERVATIONS (possibly zero, from previous experiments):
+{{ existing_observations }}
+
+IMPORTANT USAGE INSTRUCTIONS:
+- Property Manipulator: Use TALK action, e.g. { "action": "TALK", "arg1": <property_manipulator_uuid> }
+  - After dialog opens, the main menu shows available properties to adjust
+  - Step 1: Select the property you want to adjust, e.g. {"chosen_dialog_option_int": 1}
+  - Step 2: You will enter value input mode directly
+  - Step 3: In value input mode, provide ONLY the "value" field in your JSON
+  - Example workflow:
+    * First TALK: {..., "action": "TALK", "arg1": <uuid>, "chosen_dialog_option_int": 1}
+    * Next action: {..., "value": 50}
+  - When in value input mode, you may see "[Do not select this option]" in dialog options
+    * Ignore it
+    * Simply provide the "value" field
+  - Each property adjustment counts toward the usage limit when adjustments are available
+  - Once you use the Crystal Reactor, do NOT return to the Property Manipulator
+
+- Crystal Reactor: Use TALK action, e.g. { "action": "TALK", "arg1": <crystal_reactor_uuid> }
+  - The dialog shows the current resonance frequency setting
+  - Step 1: Select option 1 to enter frequency input mode
+  - Step 2: In frequency input mode, provide the numeric "value" field with the desired frequency
+  - Example: {..., "chosen_dialog_option_int": 1} then {..., "value": <frequency_value>}
+  - The reactor activates when the target crystal is inside and the frequency matches the crystal

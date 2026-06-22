@@ -1,0 +1,453 @@
+{
+  "dataset_name": "CausaLab causal graph configuration dataset",
+  "release_context": "Anonymous review release for NeurIPS 2026 Evaluations and Datasets",
+  "generated_date": "2026-05-07",
+  "source_directory": "causal_graph_configs/",
+  "included_file_count": 19,
+  "included_record_count": 950,
+  "license": "Apache-2.0",
+  "files": [
+    {
+      "path": "data/3nodes.jsonl",
+      "filename": "3nodes.jsonl",
+      "purpose": "Main 3-node graph suite",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "8b6354ec8bd4482976dc5154f8dd5a26641f829f2d1cf45edb6002c744c3c73f",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "3nodes_0",
+        "3nodes_1",
+        "3nodes_2"
+      ],
+      "last_graph_id": "3nodes_49"
+    },
+    {
+      "path": "data/4nodes.jsonl",
+      "filename": "4nodes.jsonl",
+      "purpose": "Main 4-node graph suite; baseline for several ablations and all 4-node scaling runs",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "cfdb5b727d011f1ee563ffde331b9915422a418eec035a331ef6f727054c1166",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "4nodes_0",
+        "4nodes_1",
+        "4nodes_2"
+      ],
+      "last_graph_id": "4nodes_49"
+    },
+    {
+      "path": "data/5nodes.jsonl",
+      "filename": "5nodes.jsonl",
+      "purpose": "Main 5-node graph suite; over-confidence diagnostics",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "7182105d34fc1fa886c856b080f76fe6bd5a0ba48977101c22727999637acce3",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "5nodes_0",
+        "5nodes_1",
+        "5nodes_2"
+      ],
+      "last_graph_id": "5nodes_49"
+    },
+    {
+      "path": "data/6nodes.jsonl",
+      "filename": "6nodes.jsonl",
+      "purpose": "Main 6-node graph suite; all 6-node scaling runs",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "61da103069eff2abb47d7abde4f2fcee43b3c6f93f86f92496f1a0aeed3e52d3",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "6nodes_0",
+        "6nodes_1",
+        "6nodes_2"
+      ],
+      "last_graph_id": "6nodes_49"
+    },
+    {
+      "path": "data/7nodes.jsonl",
+      "filename": "7nodes.jsonl",
+      "purpose": "Main 7-node graph suite",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "283a52d9e600700f8cbbe28a0b557aaae79bf2e7b208b3ea0f6d3353366da760",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "7nodes_0",
+        "7nodes_1",
+        "7nodes_2"
+      ],
+      "last_graph_id": "7nodes_49"
+    },
+    {
+      "path": "data/4nodes_quad_hard.jsonl",
+      "filename": "4nodes_quad_hard.jsonl",
+      "purpose": "Matched 4-node hard-quadratic mechanism suite",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "4fcef991cc115ff9b8960861f436410485f5815a97f216a69d81154cfcda4e84",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "equation_family",
+        "graph_id",
+        "nodes",
+        "params",
+        "quadratic_metadata",
+        "quadratic_mode"
+      ],
+      "first_graph_ids": [
+        "4nodes_quad_hard_0",
+        "4nodes_quad_hard_1",
+        "4nodes_quad_hard_2"
+      ],
+      "last_graph_id": "4nodes_quad_hard_49"
+    },
+    {
+      "path": "data/4nodes_hidden_n1.jsonl",
+      "filename": "4nodes_hidden_n1.jsonl",
+      "purpose": "Hidden-noise count sweep with one affected observable node",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "6e67be560e9b55325d9e8d7a606b2069d4c3767f56f5285e43aa3bb5fc5eae59",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "hidden_variable",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "4nodes_0",
+        "4nodes_1",
+        "4nodes_2"
+      ],
+      "last_graph_id": "4nodes_49"
+    },
+    {
+      "path": "data/4nodes_hidden_n2.jsonl",
+      "filename": "4nodes_hidden_n2.jsonl",
+      "purpose": "Hidden-noise count sweep with two affected observable nodes",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "b3bf2f74a8ce12b28825d54047afbc000a365993ebc56573fbb6c3764a1268a3",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "hidden_variable",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "4nodes_0",
+        "4nodes_1",
+        "4nodes_2"
+      ],
+      "last_graph_id": "4nodes_49"
+    },
+    {
+      "path": "data/4nodes_hidden_n3.jsonl",
+      "filename": "4nodes_hidden_n3.jsonl",
+      "purpose": "Hidden-noise count sweep with three affected observable nodes",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "bee9e2e1c52ba00e47874d76d044a478478ac6e1a3cf707c1010a610db3ea53a",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "hidden_variable",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "4nodes_0",
+        "4nodes_1",
+        "4nodes_2"
+      ],
+      "last_graph_id": "4nodes_49"
+    },
+    {
+      "path": "data/4nodes_hidden_vrange_pm0p5.jsonl",
+      "filename": "4nodes_hidden_vrange_pm0p5.jsonl",
+      "purpose": "Hidden-noise range sweep with perturbation values +/-0.5",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "6d9194341722852459b18937fe229208217a915c3513c27c89ed9e55232adb31",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "hidden_variable",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "4nodes_0",
+        "4nodes_1",
+        "4nodes_2"
+      ],
+      "last_graph_id": "4nodes_49"
+    },
+    {
+      "path": "data/4nodes_hidden_vrange_pm5.jsonl",
+      "filename": "4nodes_hidden_vrange_pm5.jsonl",
+      "purpose": "Hidden-noise range sweep with perturbation values +/-5",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "6e67be560e9b55325d9e8d7a606b2069d4c3767f56f5285e43aa3bb5fc5eae59",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "hidden_variable",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "4nodes_0",
+        "4nodes_1",
+        "4nodes_2"
+      ],
+      "last_graph_id": "4nodes_49"
+    },
+    {
+      "path": "data/4nodes_hidden_vrange_pm50.jsonl",
+      "filename": "4nodes_hidden_vrange_pm50.jsonl",
+      "purpose": "Hidden-noise range sweep with perturbation values +/-50",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "9a1a09ca3d98425cd227b4d13044b62693d6cb2848c9753503fbfccefeee9d26",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "hidden_variable",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "4nodes_0",
+        "4nodes_1",
+        "4nodes_2"
+      ],
+      "last_graph_id": "4nodes_49"
+    },
+    {
+      "path": "data/4nodes_hidden_freqnode_n1.jsonl",
+      "filename": "4nodes_hidden_freqnode_n1.jsonl",
+      "purpose": "Hidden-freqnode sweep with one affected node including resonance frequency",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "fc1de218ea89ff63c3c9a42919d8e469f707a9cef7f40f8069735826021276d4",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "hidden_variable",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "4nodes_0",
+        "4nodes_1",
+        "4nodes_2"
+      ],
+      "last_graph_id": "4nodes_49"
+    },
+    {
+      "path": "data/4nodes_hidden_freqnode_n2.jsonl",
+      "filename": "4nodes_hidden_freqnode_n2.jsonl",
+      "purpose": "Hidden-freqnode sweep with two affected nodes including resonance frequency",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "9748dc2fa5bfcf934a952c7523889ce48665b6d260f63e1c472ff0d2af5c7781",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "hidden_variable",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "4nodes_0",
+        "4nodes_1",
+        "4nodes_2"
+      ],
+      "last_graph_id": "4nodes_49"
+    },
+    {
+      "path": "data/4nodes_hidden_freqnode_n3.jsonl",
+      "filename": "4nodes_hidden_freqnode_n3.jsonl",
+      "purpose": "Hidden-freqnode sweep with three affected nodes including resonance frequency",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "02c5076acf210f2cd071450714884112f2698fc60bc9e0e1057863bcffb3a8e2",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "hidden_variable",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "4nodes_0",
+        "4nodes_1",
+        "4nodes_2"
+      ],
+      "last_graph_id": "4nodes_49"
+    },
+    {
+      "path": "data/4nodes_freqparent.jsonl",
+      "filename": "4nodes_freqparent.jsonl",
+      "purpose": "4-node FreqParent follow-up suite",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "848279415890cc502ccdd4bd57da4def08ce7bf8a359757bebd649dcacfb76e2",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "equation_family",
+        "frequency_can_be_parent",
+        "graph_id",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "4nodes_0",
+        "4nodes_1",
+        "4nodes_2"
+      ],
+      "last_graph_id": "4nodes_49"
+    },
+    {
+      "path": "data/6nodes_freqparent.jsonl",
+      "filename": "6nodes_freqparent.jsonl",
+      "purpose": "6-node FreqParent follow-up suite",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "5c967d588d662145ce8eb620ac7a07bbb0092a75b96a3b888289cfedee785d76",
+      "top_level_fields": [
+        "budget",
+        "description",
+        "edges",
+        "equation_family",
+        "frequency_can_be_parent",
+        "graph_id",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "6nodes_0",
+        "6nodes_1",
+        "6nodes_2"
+      ],
+      "last_graph_id": "6nodes_49"
+    },
+    {
+      "path": "data/4nodes_golden.jsonl",
+      "filename": "4nodes_golden.jsonl",
+      "purpose": "4-node Golden low-MEC trace follow-up suite",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "71781ac018eddbdba79584582d35ca7857ad8279370b2f5c0bca11724dd45770",
+      "top_level_fields": [
+        "bootstrap_past_data",
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "4nodes_0",
+        "4nodes_1",
+        "4nodes_2"
+      ],
+      "last_graph_id": "4nodes_49"
+    },
+    {
+      "path": "data/6nodes_golden.jsonl",
+      "filename": "6nodes_golden.jsonl",
+      "purpose": "6-node Golden low-MEC trace follow-up suite",
+      "format": "JSON Lines; one causal graph configuration per line",
+      "records": 50,
+      "sha256": "bf3688d3a45d53dc2f0013190196ff4441dde6e07ecfa7d7df7704e578a7ac09",
+      "top_level_fields": [
+        "bootstrap_past_data",
+        "budget",
+        "description",
+        "edges",
+        "graph_id",
+        "nodes",
+        "params"
+      ],
+      "first_graph_ids": [
+        "6nodes_0",
+        "6nodes_1",
+        "6nodes_2"
+      ],
+      "last_graph_id": "6nodes_49"
+    }
+  ],
+  "exclusion_policy": [
+    "Single example JSON files are excluded because active paper experiments use 50-record JSONL suites.",
+    "copy, backup, tmp, smoke, and missing-fill files are excluded as maintenance or debugging artifacts.",
+    "Commented-out or legacy Oracle materials are excluded from the active-paper dataset release."
+  ],
+  "anonymization_note": "No author, institution, account, or local filesystem path is included in these data files or metadata, except for this local release path outside the archived dataset itself."
+}

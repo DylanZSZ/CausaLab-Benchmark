@@ -1,0 +1,42 @@
+{
+  "graph_id": "collider_3_nodes",
+  "description": "Collider structure: A -> C, B -> C (e.g., Temperature and Density both affect Frequency)",
+  "nodes": {
+    "A": {
+      "is_controllable": true,
+      "property_name": "temperatureC",
+      "base_value": {
+        "type": "uniform",
+        "min": 10.0,
+        "max": 50.0
+      }
+    },
+    "B": {
+      "is_controllable": true,
+      "property_name": "density",
+      "base_value": {
+        "type": "uniform",
+        "min": 10.0,
+        "max": 70.0
+      }
+    },
+    "C": {
+      "is_controllable": false,
+      "property_name": "resonanceFreq",
+      "computation": "base + coeff_a * A + coeff_b * B"
+    }
+  },
+  "edges": [
+    {"from": "A", "to": "C"},
+    {"from": "B", "to": "C"}
+  ],
+  "params": {
+    "base": 500.0,
+    "coeff_a": 30.0,
+    "coeff_b": 10.0
+  }
+}
+
+
+
+

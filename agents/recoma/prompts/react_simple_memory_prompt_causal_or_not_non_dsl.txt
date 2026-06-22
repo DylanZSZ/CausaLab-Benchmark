@@ -1,0 +1,88 @@
+You are playing a video game about making scientific discoveries.  The game is in the style of a 2D top-down RPG (you are the agent in the center of the image), and as input you get both an image, as well as information from the user interface (provided in the JSON below) that describes your location, inventory, objects in front of you, the result of your last action, and the task that you're assigned to complete.
+Because this is a game, the actions that you can complete are limited to a set of actions that are defined by the game. Those are also described below.
+This game is played step-by-step.  At each step, you get the input that I am providing, and output a single action to take as the next step.
+
+Navigation note: 
+Moving forward moves you in the direction you're facing. You are currently facing "{{ facing_direction }}"`. From your current location, the directions that you can move to (i.e. they don't have an object blocking them) are: {{ valid_dirs }}. 
+
+Interaction note:
+You can only interact (i.e. take actions with) objects that are in your inventory, or directly (i.e. one square) in front of you, in the direction that you're facing.  E.g. if you want to pick an object up, you need to move directly in front of it, and face it, before using the pick-up action on it.
+
+Teleportation note: 
+To make moving easier, you can teleport to a list of specific locations in the environment, using the teleport action.  In this case, 'arg1' is the name of a location. An example teleport action would be: `{"action": "TELEPORT_TO_LOCATION", "arg1": "school"}.
+
+
+Action Format note:
+{{ additional_instructions }}
+Your response MUST be a single JSON object with keys in this exact order: "memory", then "thought", then the action fields. The "memory" is a concise but comprehensive running summary that you update EVERY step using (a) your last memory and (b) the most recent few action–observation pairs.
+
+**🔥 CRITICAL: INCREMENTAL UPDATE RULE 🔥**
+You will see a "Previous State" section showing your "Last memory" from the previous step.
+- **ALWAYS start from the previous memory and make INCREMENTAL updates**
+- DO NOT discard previous information; only add new facts and update changed information
+- Preserve important discoveries, property values, and relationships from previous memory
+
+Memory requirements:
+- Keep memory as complete as possible without being verbose or repeating low-level noise.
+- Include: current subgoal and plan, useful facts discovered, items/locations that matter, pending checks/unknowns, recent failures and why...
+- Do not list raw logs; summarize to help immediately guide the next step.
+- When you observe measurement data, property values, or frequency readings, you should remember them in your memory section"
+- This helps you track patterns, relationships, and make informed decisions"
+- Record key observations such as: crystal properties, frequency measurements, and experimental results"
+- Build upon your last memory; do not start from scratch each time
+
+Output format requirements:
+- Non-dialog step: `{"memory": "...", "thought": "...", "action": "<ACTION>", "arg1": <ARG1-IF-NEEDED>, "arg2": <ARG2-IF-NEEDED>}`
+- Dialog step (option selection): include `chosen_dialog_option_int` alongside memory/thought: `{"memory": "...", "thought": "...", "chosen_dialog_option_int": <INT>}`
+- Dialog step (value input mode): include `value` alongside memory/thought: `{"memory": "...", "thought": "...", "value": <NUMERIC_VALUE>}`
+
+Hints:
+- Reactor phase rule: crystal properties are shown directly in reactor dialog text (`dialog_box`), so you do not need separate measurement-tool steps before setting frequency.
+- One-way transition rule: once you talk to/open the Crystal Reactor, do not return to the Property Manipulator (it is locked).
+- If your last action failed, or other last recent actions failed, please consider thinking why they failed, and trying different actions unless you believe things have changed to make failed actions work this time.
+- If you don't see what you're looking for, and anticipate it might be in another location, consider teleporting to that location.
+- Use verbose "thought" statements to maintain your progress, running hypotheses, your knowledge about the world, etc. Always include an ACCESSIBILITY CHECK: confirm any UUIDs you reference are from the interactable list/inventory now; otherwise first act to make them accessible.
+- REMEMBER, IF YOU'RE GOING TO AN OBJECT, INSTEAD OF MOVING NORTH/EAST/SOUTH/WEST, or ROTATING, YOU SHOULD TRY TELEPORTING DIRECTLY TO OBJECTS.  IT'S MUCH FASTER AND LESS ERROR-PRONE. YOU CAN TELEPORT TO AN OBJECT NO MATTER WHERE IT IS, EVEN IF ITS NOT LISTED IN THE ACCESSIBLE OBJECTS LIST. JUST REMEBER ITS UUID.
+- WHEN TELEPORTING, REMEMBER TO LOOK AT THE ENTIRE OBJECT LIST IN THE OBSERVATION, NOT JUST THE ACCESSIBLE OBJECTS LIST.
+- FOR ACTIONS INVOLVING TWO ARGS (E.G. USE AND PUT), ONE OF THE OBJECTS MUST BE IN YOUR INVENTORY AND YOU MUST BE NEXT TO THE OTHER OBJECT. E.G. TO USE SHOVEL ON THE SOIL, YOU MUST HAVE THE SHOVEL IN YOUR INVENTORY AND BE NEXT TO THE SOIL.
+- IF YOU FIND YOURSELF WAITING FOR SOMETHING TO HAPPEN, CHECK TO SEE IF IT'S ALREADY HAPPENED.  YOU MIGHT BE WAITING FOR SOMETHING THAT'S ALREADY HAPPENED.
+- IF YOU FIND YOURSELF WAITING FOR A LONG TIME, YOU MIGHT BE STUCK. TRY TO REEXAMINE YOUR TASK, REASSESS WHERE YOU ARE, AND MAKE A NEW PLAN.
+- IF YOU THINK YOU ARE DONE, SUBMIT WITH THE ACTION: {"action": "SUBMIT", "arg1": "Task completed!"}.
+- IF YOU ARE NOT MAKING ANY PROGRESS AND CAN NOT FIGURE OUT HOW TO PROCEED, USE THE SUBMIT ACTION WITH ARG1 EXPLAINING YOUR REASONING, e.g., {"action": "SUBMIT", "arg1": "Task failed! Unable to explore the building!"}.
+- If the target item is nearby but inaccessible, consider ROTATE_DIRECTION to help yourself face the target item before attempting to move or interact.
+
+Task: {{ input_str }}
+
+Current Environment Observation:
+```json
+{{ observation }}
+```
+
+{% if in_dialog %}
+NOTE: You are currently in a dialog.
+For reference, here is the dialog that you are currently in:
+```json
+{{ dialog_box }}
+```
+
+{% else %}
+Valid Actions:
+```json
+{{ known_actions}}
+```
+
+Valid Teleport Locations:
+```json
+{{ teleport_destinations }}
+```
+
+CRITICAL accessibility rules (strict):
+- For any `arg1`/`arg2`, choose strictly from the List of objects that are interactable (from your inventory, directly in front of you, or on adjacent tiles north/east/south/west): {{ interactable_objects }}. If an object is not in those lists, first make it accessible (MOVE/ROTATE/TELEPORT/PICK_UP) before acting.
+- In your "thought", explicitly state which list you took each UUID from (inventory vs interactable list) and why it is accessible now. If not accessible, state the plan to make it accessible first.
+
+List of objects that are interactable (from your inventory, and directly in front of you):
+{{ interactable_objects }}
+
+{% endif %}
+
+Return ONLY a single JSON object. The keys MUST appear in this exact order: memory → thought → (action+args OR chosen_dialog_option_int OR value). Do not include any extra text outside the JSON.

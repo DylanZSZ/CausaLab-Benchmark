@@ -1,0 +1,71 @@
+{
+  "graph_id": "4_chain_6",
+  "description": "Chain structure: temperatureC -> moisture -> resonanceFreq (Sequential causation)",
+  "nodes": {
+    "temperatureC": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "temperatureC",
+      "display_name": "Temperature (°C)",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "comment": "Root cause - controllable but not directly observable"
+    },
+    "moisture": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "moisture",
+      "display_name": "Moisture",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "computation": "base_moisture + coeff_temp_moisture * temperatureC",
+      "comment": "Mediator - affected by temperatureC, affects resonanceFreq"
+    },
+    "density": {
+      "is_controllable": true,
+      "observable": true,
+      "property_name": "density",
+      "display_name": "Density",
+      "base_value": {
+        "type": "uniform",
+        "min": 15.0,
+        "max": 45.0
+      },
+      "computation": "base_density + coeff_moisture_density * moisture",
+      "comment": "Mediator - affected by moisture, affects resonanceFreq"
+    },
+    "resonanceFreq": {
+      "is_controllable": false,
+      "observable": true,
+      "property_name": "resonanceFreq",
+      "display_name": "Resonance Frequency (Hz)",
+      "computation": "base_freq + coeff_density_freq * density",
+      "comment": "End effect - only observable outcome"
+    }
+  },
+  "edges": [
+    {"from": "temperatureC", "to": "moisture"},
+    {"from": "moisture", "to": "density"},
+    {"from": "density", "to": "resonanceFreq"}
+  ],
+  "params": {
+    "base_moisture": 20.0,
+    "coeff_temp_moisture": 2.0,
+    "base_density": 20.0,
+    "coeff_moisture_density": 2.0,
+    "base_freq": 900.0,
+    "coeff_density_freq": 3.0
+  },
+  "notes": {
+    "causal_structure": "temperatureC -> moisture -> density -> resonanceFreq (chain)"
+  },
+  "budget": 6
+}
+
+
