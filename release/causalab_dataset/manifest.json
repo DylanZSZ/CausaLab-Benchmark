@@ -1,6 +1,6 @@
 {
   "dataset_name": "CausaLab causal graph configuration dataset",
-  "release_context": "Anonymous review release for NeurIPS 2026 Evaluations and Datasets",
+  "release_context": "Public release accompanying the CausaLab paper — NeurIPS 2026 Evaluations and Datasets Track",
   "generated_date": "2026-05-07",
   "source_directory": "causal_graph_configs/",
   "included_file_count": 19,
