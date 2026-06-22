@@ -1,105 +1,187 @@
 <div align="center">
 
+<br/>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://dylanzsz.github.io/causalab/figures/episode_overview.png">
+  <img src="https://dylanzsz.github.io/causalab/figures/episode_overview.png" alt="CausaLab" width="800"/>
+</picture>
+
+<br/><br/>
+
 # CausaLab
 
-### Can an LLM Agent Discover a Causal Law the Way a Scientist Would — by Experimenting?
-
-[![Paper](https://img.shields.io/badge/paper-arXiv%202605.26029-b31b1b?style=flat-square&logo=arxiv)](https://arxiv.org/abs/2605.26029)
-[![Blog](https://img.shields.io/badge/blog-dylanzsz.github.io%2Fcausalab-4285F4?style=flat-square&logo=googlechrome&logoColor=white)](https://dylanzsz.github.io/causalab)
-[![Website](https://img.shields.io/badge/website-dylanzsz.github.io-0a0a0a?style=flat-square&logo=githubpages)](https://dylanzsz.github.io)
-[![GitHub](https://img.shields.io/badge/GitHub-DylanZSZ%2FCausaLab--Benchmark-181717?style=flat-square&logo=github)](https://github.com/DylanZSZ/CausaLab-Benchmark)
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square)](LICENSE.txt)
-[![Python](https://img.shields.io/badge/python-3.10-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+**Can an LLM agent discover a causal law the way a scientist would — by experimenting?**
 
 <br/>
 
-> **⚠️ Early Release Notice:** This is version 0.0.2 — the first public release of CausaLab. Interfaces and dataset formats may change. Please open an issue if you encounter problems.
+[![Paper](https://img.shields.io/badge/NeurIPS%202026-Datasets%20%26%20Benchmarks-b31b1b?style=for-the-badge&logo=arxiv)](https://arxiv.org/abs/2605.26029)&nbsp;
+[![Blog](https://img.shields.io/badge/Blog-dylanzsz.github.io%2Fcausalab-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://dylanzsz.github.io/causalab)&nbsp;
+[![Website](https://img.shields.io/badge/Author-dylanzsz.github.io-0a0a0a?style=for-the-badge&logo=githubpages)](https://dylanzsz.github.io)
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](LICENSE.txt)&nbsp;
+[![Python](https://img.shields.io/badge/Python-3.10-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)&nbsp;
+[![Version](https://img.shields.io/badge/Version-0.0.2%20early%20release-orange?style=flat-square)](https://github.com/DylanZSZ/CausaLab-Benchmark/releases)&nbsp;
+[![GitHub Stars](https://img.shields.io/github/stars/DylanZSZ/CausaLab-Benchmark?style=flat-square)](https://github.com/DylanZSZ/CausaLab-Benchmark/stargazers)
 
 <br/>
 
-<img src="https://dylanzsz.github.io/causalab/figures/episode_overview.png" alt="One CausaLab episode" width="780"/>
+> **⚠️ v0.0.2 — First Public Release.** Interfaces and dataset formats may change.
+> Please [open an issue](https://github.com/DylanZSZ/CausaLab-Benchmark/issues) if you encounter problems.
 
-*One CausaLab episode. A hidden SCM generates prior records, a manipulator crystal the agent can poke, and a held-out reactor crystal governed by the same law. The agent intervenes, observes, writes its current causal hypothesis, and finally predicts the reactor's hidden frequency. We score prediction AND the recovered graph + equation against ground truth.*
+<br/>
 
 </div>
 
 ---
 
-## Why CausaLab?
+<div align="center">
 
-A real scientist does not look up how the world works. They **intervene** on it, watch what changes, and revise a theory until it transfers to a case they have never seen.
+### The core question
 
-Current LLM benchmarks mostly test *retrieval* — can the model recall a known fact? CausaLab tests *discovery*: can the agent run experiments, recover the causal mechanism from scratch, and apply it to a novel crystal it has never seen?
+</div>
 
-**Three headline results from our paper:**
+A real scientist doesn't look up how the world works. They **intervene** on it, watch what changes, and revise a theory until it transfers to a case they've never seen. Most LLM benchmarks test *retrieval* — can the model recall a known fact? **CausaLab tests discovery**: can an agent run experiments, recover the hidden causal mechanism, and apply it to a novel case from scratch?
 
-| Finding | Detail |
-|---------|--------|
-| **Prediction ≠ Understanding** | `GPT-5.2-high` reaches **92% task accuracy** on 6-node graphs but only **0.47 all-edge F₁** — right number, wrong graph. |
-| **How you experiment is the whole game** | Agent-chosen interventions recover faithful structure; handing the agent perfect pre-collected data ("Golden") boosts the answer but *not* the mechanism. The *act of choosing* the experiment carries the structural signal. |
-| **Agents fail by stopping early** | Win or lose, runs leave ~half their intervention budget unused. A single "check your theory against your evidence" step lifts 4-node accuracy from **48% → 60%**. |
+Each episode hides a freshly sampled structural causal model (SCM) inside a synthetic crystal reactor. The agent manipulates variables, observes outcomes, and must both **predict** a held-out measurement *and* **recover the causal graph** that explains it. You can't win by reciting memorized facts.
 
 ---
 
-## Repository Structure
+<div align="center">
+
+### Three findings
+
+</div>
+
+<table>
+<tr>
+<td width="33%" align="center">
+
+**🎯 Prediction ≠ Understanding**
+
+`GPT-5.2-high` reaches **92% task accuracy** on 6-node graphs — but only **0.47 all-edge F₁**.
+
+Right number. Wrong graph.
+
+</td>
+<td width="33%" align="center">
+
+**🔬 The act of experimenting matters**
+
+Handing the agent *perfect* pre-collected data ("Golden") boosts prediction but **not** mechanism recovery.
+
+The *choice* of experiment carries structural signal.
+
+</td>
+<td width="33%" align="center">
+
+**⏱️ Agents stop too soon**
+
+Win or lose, runs leave ~half their intervention budget unused.
+
+One "check theory vs. evidence" step lifts 4-node accuracy: **48% → 60%**.
+
+</td>
+</tr>
+</table>
+
+---
+
+## Contents
+
+- [How It Works](#how-it-works)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Running Experiments](#running-experiments)
+- [Dataset](#dataset)
+- [Citation](#citation)
+- [Authors](#authors)
+
+---
+
+## How It Works
 
 ```
-CausaLab/
+┌─────────────────────────────────────────────────────────────────┐
+│  Hidden SCM  →  prior records  →  agent observes               │
+│                                                                  │
+│  Agent intervenes on manipulator crystal                        │
+│  ↓  (repeat until budget exhausted)                             │
+│  Agent emits DSL causal hypothesis at each step                 │
+│  ↓                                                               │
+│  Final prediction: reactor crystal's hidden frequency           │
+│                                                                  │
+│  Scoring: prediction accuracy  +  graph/equation F₁             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+A **hidden SCM** governs both a *manipulator* crystal (the agent can poke it) and a *reactor* crystal (held out). The agent must discover the shared causal law through experimentation, then transfer it. We score **two things**: whether the agent got the right answer, and whether it recovered the right mechanism.
+
+<details>
+<summary><b>Repository structure</b></summary>
+
+```
+CausaLab-Benchmark/
+│
 ├── discoveryworld/              # Reactor Lab environment (DiscoveryWorld fork)
-│   └── scenarios/reactor_lab.py #   ← the CausaLab task
-├── agents/recoma/               # ReAct / Recoma agent, prompts, model adapters
+│   └── scenarios/reactor_lab.py #   ← the CausaLab task definition
+│
+├── agents/recoma/               # ReAct / Recoma agent
 │   ├── run_recoma.py            #   ← main agent runner
+│   ├── react_controller.py      #   ← controller loop
 │   └── prompts/                 #   ← DSL & non-DSL prompt variants
+│
 ├── scripts/
-│   ├── experiments/             # Experiment launch scripts & summarizer
+│   ├── experiments/             # Launch scripts, summarizer, monitor
 │   ├── vis_backend/             # Trajectory visualization server
 │   └── vis_frontend/            # Visualization UI
+│
 ├── causalab_reeval/             # ReEval scoring module
-├── release/causalab_dataset/    # Released synthetic graph configs (950 records)
+│
+├── release/causalab_dataset/    # Synthetic graph configs — 950 records
 │   └── data/                    #   ← 19 JSONL suites, 3–7 nodes
+│
 └── examples/sample_runs/        # Bundled sample trajectory for offline checks
 ```
+
+</details>
 
 ---
 
 ## Installation
 
-Requires **Python 3.10**.
+> Requires **Python 3.10**
 
 ```bash
 conda create -n causalab python=3.10 -y
 conda activate causalab
+
 pip install --upgrade pip
 pip install --use-pep517 -r agents/requirements.txt
 pip install -e .
 ```
 
-For API-backed runs, export your key:
+For API-backed runs:
 
 ```bash
 export OPENAI_API_KEY=sk-...
-# Optionally override the endpoint (e.g. for Azure, Together, etc.)
-export OPENAI_API_BASE=https://api.openai.com/v1
+export OPENAI_API_BASE=https://api.openai.com/v1   # optional override
 ```
 
-Offline smoke checks (dry-run, ReEval on sample) do not require an API key.
+Offline smoke checks do not require an API key.
 
 ---
 
 ## Quick Start
 
-### 1. Dry-run (no API calls)
-
-Verify setup, graph loading, and manifest expansion:
+**1 — Dry-run (no API calls)**
 
 ```bash
 SKIP_CONDA_ACTIVATE=1 DRY_RUN=1 GRAPH_LIMIT=1 \
   bash scripts/experiments/run_react_simple-mem_freqparent_4nodes_main.sh
 ```
 
-### 2. ReEval on the bundled sample
-
-Score the bundled sample trajectory without any API calls:
+**2 — ReEval on the bundled sample**
 
 ```bash
 python -m causalab_reeval.run_lightweight_reeval \
@@ -108,7 +190,7 @@ python -m causalab_reeval.run_lightweight_reeval \
   examples/sample_runs/react_simple-mem
 ```
 
-### 3. Visualize a trajectory
+**3 — Trajectory visualization**
 
 ```bash
 python scripts/vis_backend/visualization_server.py
@@ -119,86 +201,85 @@ python scripts/vis_backend/visualization_server.py
 
 ## Running Experiments
 
-Experiment scripts live in `scripts/experiments/`. All resolve paths relative to the repository root; outputs go under `output_dir/`.
-
-**Useful environment controls (most scripts):**
+All scripts live in `scripts/experiments/` and resolve paths from the repo root. Outputs go to `output_dir/`.
 
 | Variable | Effect |
-|----------|--------|
-| `DRY_RUN=1` | Print jobs without API calls |
-| `GRAPH_LIMIT=N` | First N graph configs only |
+|---|---|
+| `DRY_RUN=1` | Print planned jobs, no API calls |
+| `GRAPH_LIMIT=N` | Restrict to first *N* graph configs |
 | `SEEDS_PER_GRAPH=N` | Seeds per graph |
 | `BATCH_SIZE=N` | Concurrent local jobs |
-| `SKIP_CONDA_ACTIVATE=1` | Use current Python env |
+| `SKIP_CONDA_ACTIVATE=1` | Use current Python environment |
 
-**Representative suites:**
+<details>
+<summary><b>Experiment scripts reference</b></summary>
 
 ```bash
-# Main 4-node / 6-node runs (GPT-5-mini)
-bash scripts/experiments/run_react_simple-mem_parallel.sh
+# ── Main runs ─────────────────────────────────────────────────────
+bash scripts/experiments/run_react_simple-mem_parallel.sh          # GPT-5-mini 4/6-node
+bash scripts/experiments/run_react_simple-mem_scaling_gpt52.sh     # GPT-5.2 scaling
 
-# GPT-5.2 scaling
-bash scripts/experiments/run_react_simple-mem_scaling_gpt52.sh
-
-# Observation / intervention scaling
+# ── Scaling suites ────────────────────────────────────────────────
 bash scripts/experiments/run_react_simple-mem_scaling_suite.sh
 bash scripts/experiments/run_react_simple-mem_scaling_suite_6nodes.sh
 
-# Quadratic formula suites
+# ── Formula variants ──────────────────────────────────────────────
 bash scripts/experiments/run_react_simple-mem_4nodes_quad.sh
 bash scripts/experiments/run_react_simple-mem_4nodes_quad_hard.sh
 
-# Hidden-variable suites
+# ── Hidden-variable suites ────────────────────────────────────────
 bash scripts/experiments/run_hidden_variants_full.sh
 bash scripts/experiments/run_hidden_frequency_node_priority_full.sh
 
-# Oracle / FreqParent / Golden follow-ups
+# ── Oracle / FreqParent / Golden follow-ups ───────────────────────
 bash scripts/experiments/run_react_simple-mem_oracle_main_suite.sh
 bash scripts/experiments/run_react_simple-mem_freqparent_4nodes_main.sh
 bash scripts/experiments/run_react_simple-mem_golden_4nodes_main.sh
 ```
 
----
+</details>
 
-## Summarizing Results
-
-Each completed seed writes a `*_complete.txt` flag (`1` = solved, `0` = failed). Point the summarizer at the timestamped run root:
+**Summarizing results**
 
 ```bash
 python scripts/experiments/summarize_completion_flags.py \
-  output_dir/react_simple-mem/obs_CausalFreqParent_gpt-5-mini/4nodes_main/20260618-155735_dsl
+  output_dir/react_simple-mem/obs_CausalFreqParent_gpt-5-mini/4nodes_main/<run_id> \
+  --json-out output_dir/summary.json \
+  --csv-out  output_dir/flags.csv
 ```
-
-Add `--json-out` / `--csv-out` for machine-readable output.
 
 ---
 
 ## Dataset
 
-The `release/causalab_dataset/` directory contains **950 synthetic causal graph configurations** across 19 JSONL suites (3–7 nodes, standard, quadratic, hidden-variable, FreqParent, and Golden variants). It ships with a Croissant metadata file and SHA-256 checksums.
+`release/causalab_dataset/` contains **950 synthetic causal graph configurations** across **19 JSONL suites** (3–7 nodes; standard, quadratic, hidden-variable, FreqParent, and Golden variants). Ships with Croissant metadata and SHA-256 checksums.
 
 ```python
 import json
 from pathlib import Path
 
-configs = [json.loads(l) for l in Path("release/causalab_dataset/data/4nodes.jsonl").read_text().splitlines()]
+configs = [
+    json.loads(line)
+    for line in Path("release/causalab_dataset/data/4nodes.jsonl").read_text().splitlines()
+]
 print(len(configs), configs[0]["graph_id"])
 # → 50  4nodes_0
 ```
 
-See [`release/causalab_dataset/README.md`](release/causalab_dataset/README.md) for the full schema.
+See [`release/causalab_dataset/README.md`](release/causalab_dataset/README.md) for the full schema and field reference.
 
 ---
 
 ## Citation
 
-If you use CausaLab in your research, please cite:
-
 ```bibtex
 @article{zhang2025causalab,
   title     = {CausaLab: Interactive Causal Discovery Toward AI Scientists},
-  author    = {Zhang, Dylan (Shizhuo) and Yang, Junlin and Song, Xiangchen and Dai, Qirun and Liu, Xiao and Chen, Yuen and Vashishtha, Aniket and Shi, Jing and Tan, Chenhao and Peng, Hao},
-  journal   = {Advances in Neural Information Processing Systems, Datasets and Benchmarks Track},
+  author    = {Zhang, Dylan (Shizhuo) and Yang, Junlin and Song, Xiangchen
+               and Dai, Qirun and Liu, Xiao and Chen, Yuen and Vashishtha, Aniket
+               and Shi, Jing and Tan, Chenhao and Peng, Hao},
+  journal   = {Advances in Neural Information Processing Systems,
+               Datasets and Benchmarks Track},
   year      = {2025},
   url       = {https://arxiv.org/abs/2605.26029},
 }
@@ -206,23 +287,21 @@ If you use CausaLab in your research, please cite:
 
 ---
 
-## Links
+## Authors
 
-| Resource | URL |
-|----------|-----|
-| Paper | [arxiv.org/abs/2605.26029](https://arxiv.org/abs/2605.26029) |
-| Blog | [dylanzsz.github.io/causalab](https://dylanzsz.github.io/causalab) |
-| Personal website | [dylanzsz.github.io](https://dylanzsz.github.io) |
-| Code | [github.com/DylanZSZ/CausaLab-Benchmark](https://github.com/DylanZSZ/CausaLab-Benchmark) |
+**Dylan Zhang** · [dylanzsz.github.io](https://dylanzsz.github.io) · [@dylan_works_](https://x.com/dylan_works_) · [shizhuo2@illinois.edu](mailto:shizhuo2@illinois.edu)
 
----
+With **Junlin Yang, Xiangchen Song, Qirun Dai, Xiao Liu, Yuen Chen, Aniket Vashishtha, Jing Shi, Chenhao Tan,** and **Hao Peng** — across UIUC, Tsinghua, CMU, University of Chicago, and Adobe.
 
-## License
-
-Apache 2.0 — see [LICENSE.txt](LICENSE.txt).
-
----
+<br/>
 
 <div align="center">
-<sub>Made with ☕ by <a href="https://dylanzsz.github.io">Dylan Zhang</a> and collaborators at UIUC, Tsinghua, CMU, U Chicago, and Adobe.</sub>
+
+[📄 Paper](https://arxiv.org/abs/2605.26029) &nbsp;·&nbsp;
+[📝 Blog](https://dylanzsz.github.io/causalab) &nbsp;·&nbsp;
+[🌐 Website](https://dylanzsz.github.io) &nbsp;·&nbsp;
+[💻 Code](https://github.com/DylanZSZ/CausaLab-Benchmark)
+
+<sub>Apache 2.0 — © 2026 the CausaLab authors</sub>
+
 </div>
