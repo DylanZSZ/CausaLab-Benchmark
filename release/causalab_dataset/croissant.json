@@ -8,7 +8,7 @@
   },
   "@type": "sc:Dataset",
   "name": "CausaLab Causal Graph Configuration Dataset",
-  "description": "Synthetic causal graph configuration suites used to evaluate agentic causal discovery and intervention planning in a crystal-reactor environment. Released alongside the CausaLab paper (NeurIPS 2026 Datasets & Benchmarks) by Dylan Zhang and collaborators at UIUC, Tsinghua, CMU, University of Chicago, and Adobe.",
+  "description": "Synthetic causal graph configuration suites used to evaluate agentic causal discovery and intervention planning in a crystal-reactor environment. Released alongside the CausaLab paper (arXiv:2605.26029) by Dylan Zhang and collaborators at UIUC, Tsinghua, CMU, University of Chicago, and Adobe.",
   "url": "https://github.com/DylanZSZ/CausaLab-Benchmark/tree/main/release/causalab_dataset",
   "license": "https://spdx.org/licenses/Apache-2.0.html",
   "conformsTo": "http://mlcommons.org/croissant/1.1",

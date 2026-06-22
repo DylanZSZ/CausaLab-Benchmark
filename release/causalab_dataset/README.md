@@ -86,7 +86,7 @@ configs:
 
 # CausaLab Causal Graph Configuration Dataset
 
-Public release accompanying the CausaLab paper — NeurIPS 2026 Evaluations and Datasets Track.
+Public release accompanying the CausaLab paper — arXiv:2605.26029.
 
 This package contains the synthetic causal graph configuration suites used by the active experiments in the CausaLab paper. Each JSONL file contains 50 graph configurations, one JSON object per line.
 

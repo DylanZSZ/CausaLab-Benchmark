@@ -15,7 +15,7 @@
 
 <br/>
 
-[![Paper](https://img.shields.io/badge/NeurIPS%202026-Datasets%20%26%20Benchmarks-b31b1b?style=for-the-badge&logo=arxiv)](https://arxiv.org/abs/2605.26029)&nbsp;
+[![Paper](https://img.shields.io/badge/arXiv-2605.26029-b31b1b?style=for-the-badge&logo=arxiv)](https://arxiv.org/abs/2605.26029)&nbsp;
 [![Blog](https://img.shields.io/badge/Blog-dylanzsz.github.io%2Fcausalab-4285F4?style=for-the-badge&logo=googlechrome&logoColor=white)](https://dylanzsz.github.io/causalab)&nbsp;
 [![Website](https://img.shields.io/badge/Author-dylanzsz.github.io-0a0a0a?style=for-the-badge&logo=githubpages)](https://dylanzsz.github.io)
 
@@ -278,8 +278,7 @@ See [`release/causalab_dataset/README.md`](release/causalab_dataset/README.md) f
   author    = {Zhang, Dylan (Shizhuo) and Yang, Junlin and Song, Xiangchen
                and Dai, Qirun and Liu, Xiao and Chen, Yuen and Vashishtha, Aniket
                and Shi, Jing and Tan, Chenhao and Peng, Hao},
-  journal   = {Advances in Neural Information Processing Systems,
-               Datasets and Benchmarks Track},
+  journal   = {arXiv preprint arXiv:2605.26029},
   year      = {2025},
   url       = {https://arxiv.org/abs/2605.26029},
 }
